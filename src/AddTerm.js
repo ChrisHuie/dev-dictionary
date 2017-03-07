@@ -7,7 +7,7 @@ class AddTerm extends Component {
   };
 
   createTerm = () => {
-    
+
   }
 
   render() {
