@@ -2,22 +2,40 @@ import React, { Component } from 'react';
 import { Button, Glyphicon } from 'react-bootstrap';
 import Term from './Term';
 import AddTerm from './AddTerm';
-import jsonData from '../data/db';
-import filter from 'lodash/filter'
+//import { Request} from 'superagent';
+
 
 // Don't do this. You need to actually fetch the data from the server using
 // the API. This is a cheater way just to provide a visual example of what you
 // should see when you're done.
-const terms = jsonData.terms.map(term => ({
-  ...term,
-  definitions: filter(jsonData.definitions, { termId: term.id })
-}))
+const terms = term => `http://localhost:4501/terms/${term}`;
 
 
 class Dictionary extends Component {
-  state = {
-    showAddTerm: false
-  };
+  constructor(props) {
+      super(props);
+      this.state = {
+          showAddTerm: false
+      }
+  }
+
+  componentDidMount() {
+      fetch(terms(this.state.props))
+          .then(function(response) {
+              return response.json();
+          })
+          .then(function(response) {
+              this.setState({
+                  term: response
+              })
+          });
+      // Request.get(terms).then(response => {
+      //     this.setState({
+      //         terms: response
+      //     });
+      // });
+  }
+
 
   toggleAdd = () => this.setState({ showAddTerm: !this.state.showAddTerm })
 
