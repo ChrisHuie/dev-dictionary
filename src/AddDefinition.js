@@ -1,8 +1,11 @@
 import React, { Component } from 'react';
+import ReactDOM from 'react-dom';
 import { Button, Col, ControlLabel, Form, FormControl, FormGroup, HelpBlock, Image, Well } from 'react-bootstrap';
 import Select from 'react-select';
 import jsonData from '../data/db';
 import 'react-select/dist/react-select.css';
+import axios from 'axios';
+
 
 // TODO: Fetch list of users from server via API.
 const options = jsonData.users;
@@ -28,7 +31,13 @@ class AddDefinition extends Component {
   };
 
   createDefinition = () => {
-    // POST the definition to the server.
+      let newDefinition = {
+          content : ReactDOM.findDOMNode(this.refs.definitionControl).value,
+          termId: 2,
+          userId: 2
+      };
+
+      axios.post('http://localhost:4501/definitions', newDefinition);
   }
 
   selectWho = user => this.setState({ who: user });
@@ -45,7 +54,7 @@ class AddDefinition extends Component {
               Definition
             </Col>
             <Col sm={10}>
-              <FormControl componentClass="textarea" placeholder="Add your definition"/>
+              <FormControl componentClass="textarea" placeholder="Add your definition" ref="definitionControl" />
             </Col>
           </FormGroup>
 

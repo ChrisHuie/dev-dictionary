@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
 import { Button, ControlLabel, Form, FormControl, FormGroup, Col, Well } from 'react-bootstrap';
-import update from 'react-addons-update';
 import axios from 'axios'
 
 class AddTerm extends Component {
@@ -10,8 +9,8 @@ class AddTerm extends Component {
   };
 
   createTerm() {
-      var newTerms = {
-        name : ReactDOM.findDOMNode(this.refs.formControl).value,
+      let newTerms = {
+        name : ReactDOM.findDOMNode(this.refs.termControl).value,
         userId : 1
       };
 
@@ -31,7 +30,7 @@ class AddTerm extends Component {
               Term
             </Col>
             <Col sm={10}>
-              <FormControl ref="formControl" />
+              <FormControl ref="termControl" />
             </Col>
           </FormGroup>
 

@@ -22,15 +22,6 @@ class Dictionary extends Component {
   }
 
   componentWillMount() {
-      /* fetch(terms(this.state.props))
-       .then(function(response) {
-       return response.json();
-       })
-       .then(function(response) {
-       this.setState({
-       term: response
-       })
-       });*/
       axios.get('http://localhost:4501/terms')
           .then((response) => {
             this.setState({
@@ -59,8 +50,7 @@ class Dictionary extends Component {
         {showAddTerm && <AddTerm hide={this.toggleAdd} />}
 {        <div className="terms">
           {this.state.terms.map(term => {
-
-            return <Term key={term.id} term={term} definitions={this.state.definitions} />;
+              return <Term key={term.id} term={term} definitions={this.state.definitions} />;
           })}
         </div>}
       </div>
