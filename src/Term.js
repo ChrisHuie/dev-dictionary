@@ -22,7 +22,7 @@ class Term extends Component {
     return (
       <div className="term">
         <h3><Link to={`/terms/${term.name}`}>{term.name}</Link></h3>
-        {term.definitions.map((definition, index) => {
+        {this.props.definitions.map((definition, index) => {
           return <Definition key={definition.id} definition={definition} index={index + 1} />
         })}
         <div className="add-definition-section">
